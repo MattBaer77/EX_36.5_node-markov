@@ -39,7 +39,7 @@ class MarkovMachine {
 
       }
 
-    return chains
+    return chains;
 
   }
 
@@ -48,23 +48,23 @@ class MarkovMachine {
 
   makeText(numWords = 100) {
 
-    const keys = Array.from(this.chains.keys())
+    const keys = Array.from(this.chains.keys());
     const randomInitialKey = keys[Math.floor(Math.random() * keys.length)];
-    let key = randomInitialKey
+    let key = randomInitialKey;
 
-    const textArray = []
+    const textArray = [];
 
     for (let i=0; i<numWords; i++){
 
-      const values = this.chains.get(key)
+      const values = this.chains.get(key);
 
-      const randomValue = values[Math.floor(Math.random() * values.length)]
+      const randomValue = values[Math.floor(Math.random() * values.length)];
 
       if (randomValue != null) {
 
-        textArray.push(randomValue)
+        textArray.push(randomValue);
 
-        key = randomValue
+        key = randomValue;
 
       }
 
@@ -80,3 +80,7 @@ class MarkovMachine {
 
   }
 }
+
+module.exports = {
+  MarkovMachine,
+};
