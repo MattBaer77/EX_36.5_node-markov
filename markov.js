@@ -70,8 +70,7 @@ class MarkovMachine {
 
       else {
 
-        i--;
-        key = keys[Math.floor(Math.random() * keys.length)];
+        return textArray.join(' ');
 
       }
 
