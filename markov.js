@@ -18,31 +18,6 @@ class MarkovMachine {
 
   makeChains() {
 
-    // FIRST ATTEMPT
-
-    // for (let word of this.words) {
-
-    //   if (!chains[word]) {
-
-    //     console.log("print-")
-    //     console.log(word);
-    //     // console.log(this.words.indexOf(word))
-    //     chains[word] = [this.words[((this.words.indexOf(word)) + 1)]]
-
-    //   }
-    //   else {
-
-    //     console.log("skip")
-    //     chains[word].push(this.words[((this.words.indexOf(word)) + 1)])
-
-    //   }
-      
-    // }
-
-    // return chains
-
-    // FIRST ATTEMPT
-
     let chains = new Map
 
     for (
