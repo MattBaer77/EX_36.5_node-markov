@@ -18,7 +18,7 @@ class MarkovMachine {
 
   makeChains() {
 
-    let chains = new Map
+    const chains = new Map();
 
     for (
       let i = 0;
@@ -29,12 +29,12 @@ class MarkovMachine {
         const word = this.words[i];
         const next = this.words[i+1] || null;
 
-        if (chains[word]){
-          chains[word].push(next);
+        if (chains.get(word)){
+          chains.get(word).push(next);
         }
 
         else {
-          chains[word] = [next]
+          chains.set(word, [next]);
         }
 
       }
@@ -47,6 +47,37 @@ class MarkovMachine {
   /** return random text from chains */
 
   makeText(numWords = 100) {
-    // TODO
+
+    const keys = Array.from(this.chains.keys())
+    const randomInitialKey = keys[Math.floor(Math.random() * keys.length)];
+    let key = randomInitialKey
+
+    const textArray = []
+
+    for (let i=0; i<numWords; i++){
+
+      const values = this.chains.get(key)
+
+      const randomValue = values[Math.floor(Math.random() * values.length)]
+
+      if (randomValue != null) {
+
+        textArray.push(randomValue)
+
+        key = randomValue
+
+      }
+
+      else {
+
+        i--;
+        key = keys[Math.floor(Math.random() * keys.length)];
+
+      }
+
+    }
+
+    return textArray.join(' ');
+
   }
 }
