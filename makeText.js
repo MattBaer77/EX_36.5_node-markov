@@ -4,9 +4,10 @@ const fs = require("fs");
 const {MarkovMachine} = require("./markov");
 const process = require("process");
 const axios = require("axios");
+const strip = require("string-strip-html")
 
 function generateText(text) {
-    let mm = new MarkovMachine(text);
+    const mm = new MarkovMachine(text);
     console.log(mm.makeText());
 }
 
@@ -21,15 +22,33 @@ function makeText(path) {
     });
 }
 
+async function makeTextFromURL(url) {
 
-let method = process.argv[2]
-let path = process.argv[3]
+    let resp;
+
+    try {
+        resp = await axios.get(url);
+    } catch (err) {
+        console.error('Cannot reach URL')
+        console.error(err)
+        process.exit(1);
+    }
+
+    respNoHTML = strip.stripHtml(resp.data).result
+    // console.log(respNoHTML)
+    generateText(respNoHTML)
+}
+
+const method = process.argv[2]
+const path = process.argv[3]
 
 if (method === "file") {
     makeText(path);
 }
 
-
+else if (method === 'url') {
+    makeTextFromURL(path);
+}
 
 else {
     console.error('Unknown method')
